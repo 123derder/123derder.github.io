@@ -44,6 +44,7 @@
             justify-content: center;
             font-size: 2rem;
             color: #888;
+            overflow: hidden;
         }
         h1 {
             font-size: 1.8rem;
@@ -99,6 +100,7 @@
         .app-icon {
             width: 100px;
             height: 100px;
+            min-width: 100px;
             border-radius: 22px;
             margin-right: 1.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -131,6 +133,58 @@
             height: 1px;
             background-color: #eee;
             margin: 2rem 0;
+        }
+        
+        /* 響應式設計 - 手機版面 */
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .app-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .app-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .app-details {
+                width: 100%;
+            }
+            
+            .contact-item {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .contact-item a {
+                word-break: break-all;
+            }
         }
     </style>
 </head>
