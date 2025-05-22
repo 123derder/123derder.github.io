@@ -178,7 +178,18 @@
             }
             
             .contact-item {
-                margin: 0.5rem 0 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin: 0.75rem 0;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .contact-item svg {
+                min-width: 18px;
+                height: 18px;
+                margin-right: 0.5rem;
             }
             
             .contact-item a {
@@ -186,10 +197,8 @@
             }
             
             .email-container {
-                padding: 0.5rem;
-                margin-top: 0.3rem;
-                width: 100%;
-                text-align: center;
+                display: flex;
+                align-items: center;
             }
             
             .app-info {
@@ -245,9 +254,7 @@
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                <div class="email-container">
-                    <a href="mailto:derderappledev@gmail.com">derderappledev@gmail.com</a>
-                </div>
+                <a href="mailto:derderappledev@gmail.com">derderappledev@gmail.com</a>
             </div>
             
             <div class="divider"></div>
