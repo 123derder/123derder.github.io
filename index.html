@@ -155,6 +155,15 @@
             display: flex;
             gap: 0.5rem;
         }
+        
+        .lang-toggle {
+            display: none;
+        }
+        
+        .lang-options {
+            display: flex;
+            gap: 0.5rem;
+        }
         .lang-btn {
             padding: 0.5rem 1rem;
             border: 1px solid #ddd;
@@ -284,19 +293,90 @@
                 top: 1rem;
                 right: 1rem;
                 z-index: 1000;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0;
+            }
+            
+            .lang-toggle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #007aff;
+                color: white;
+                border: none;
+                font-size: 1rem;
+                cursor: pointer;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+                transition: all 0.3s ease;
+            }
+            
+            .lang-toggle:hover {
+                transform: scale(1.1);
+            }
+            
+            .lang-options {
+                display: none !important;
+                flex-direction: column;
+                gap: 0.3rem;
+                margin-top: 0.5rem;
+                background-color: white;
+                border-radius: 8px;
+                padding: 0.5rem;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                animation: slideDown 0.3s ease;
+            }
+            
+            .lang-options.show {
+                display: flex !important;
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
             
             .lang-btn {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
             }
+            
+            .app-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-bottom: 1rem;
+                grid-template-columns: none;
+                display: flex;
+                gap: 0.75rem;
+            }
+            
+            .app-icon {
+                margin: 0 auto;
+                width: 80px;
+                height: 80px;
+                order: -1;
+                align-self: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="language-switcher">
-        <button class="lang-btn active" onclick="switchLanguage('zh')" id="zh-btn">繁中</button>
-        <button class="lang-btn" onclick="switchLanguage('en')" id="en-btn">EN</button>
+        <button class="lang-toggle" onclick="toggleLanguageOptions()" id="lang-toggle">中</button>
+        <div class="lang-options" id="lang-options">
+            <button class="lang-btn active" onclick="switchLanguage('zh')" id="zh-btn">繁中</button>
+            <button class="lang-btn" onclick="switchLanguage('en')" id="en-btn">EN</button>
+        </div>
     </div>
 
     <div class="container">
@@ -389,12 +469,39 @@
         // 語言切換功能
         let currentLanguage = 'zh';
         
+        function toggleLanguageOptions() {
+            const options = document.getElementById('lang-options');
+            options.classList.toggle('show');
+            
+            // 點擊外部區域關閉選項
+            if (options.classList.contains('show')) {
+                setTimeout(() => {
+                    document.addEventListener('click', closeLanguageOptions);
+                }, 100);
+            }
+        }
+        
+        function closeLanguageOptions(event) {
+            const switcher = document.querySelector('.language-switcher');
+            if (!switcher.contains(event.target)) {
+                document.getElementById('lang-options').classList.remove('show');
+                document.removeEventListener('click', closeLanguageOptions);
+            }
+        }
+        
         function switchLanguage(lang) {
             currentLanguage = lang;
             
             // 更新按鈕狀態
             document.getElementById('zh-btn').classList.toggle('active', lang === 'zh');
             document.getElementById('en-btn').classList.toggle('active', lang === 'en');
+            
+            // 更新語言切換按鈕文字
+            document.getElementById('lang-toggle').textContent = lang === 'zh' ? '中' : 'EN';
+            
+            // 關閉語言選項
+            document.getElementById('lang-options').classList.remove('show');
+            document.removeEventListener('click', closeLanguageOptions);
             
             // 更新頁面標題
             document.title = lang === 'zh' ? 'Yu Te Lu - 開發者資訊' : 'Yu Te Lu - Developer Info';
